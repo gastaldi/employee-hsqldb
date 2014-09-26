@@ -1,0 +1,40 @@
+DROP SCHEMA PUBLIC CASCADE
+
+CREATE MEMORY TABLE EMPLOYEES(EMPLOYEENUMBER INTEGER NOT NULL PRIMARY KEY,LASTNAME VARCHAR(50) NOT NULL,FIRSTNAME VARCHAR(50) NOT NULL,EXTENSION VARCHAR(10) NOT NULL,EMAIL VARCHAR(100) NOT NULL,OFFICE_ID VARCHAR(10) NOT NULL,REPORTSTO INTEGER,JOBTITLE VARCHAR(50) NOT NULL)
+CREATE MEMORY TABLE OFFICES(OFFICE_ID INTEGER NOT NULL PRIMARY KEY,CITY VARCHAR(50) NOT NULL,PHONE VARCHAR(50) NOT NULL,ADDRESSLINE1 VARCHAR(50) NOT NULL,ADDRESSLINE2 VARCHAR(50),STATE VARCHAR(50),COUNTRY VARCHAR(50) NOT NULL,POSTALCODE VARCHAR(15) NOT NULL,TERRITORY VARCHAR(10) NOT NULL)
+
+SET WRITE_DELAY 10
+SET SCHEMA PUBLIC
+INSERT INTO EMPLOYEES VALUES(1002,'Murphy','Diane','x5800','dmurphy@classicmodelcars.com',1,NULL,'President')
+INSERT INTO EMPLOYEES VALUES(1056,'Patterson','Mary','x4611','mpatterso@classicmodelcars.com',1,1002,'VP Sales')
+INSERT INTO EMPLOYEES VALUES(1076,'Firrelli','Jeff','x9273','jfirrelli@classicmodelcars.com',1,1002,'VP Marketing')
+INSERT INTO EMPLOYEES VALUES(1088,'Patterson','William','x4871','wpatterson@classicmodelcars.com',6,1056,'Sales Manager (APAC)')
+INSERT INTO EMPLOYEES VALUES(1102,'Bondur','Gerard','x5408','gbondur@classicmodelcars.com',4,1056,'Sale Manager (EMEA)')
+INSERT INTO EMPLOYEES VALUES(1143,'Bow','Anthony','x5428','abow@classicmodelcars.com',1,1056,'Sales Manager (NA)')
+INSERT INTO EMPLOYEES VALUES(1165,'Jennings','Leslie','x3291','ljennings@classicmodelcars.com',1,1143,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1166,'Thompson','Leslie','x4065','lthompson@classicmodelcars.com',1,1143,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1188,'Firrelli','Julie','x2173','jfirrelli@classicmodelcars.com',2,1143,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1216,'Patterson','Steve','x4334','spatterson@classicmodelcars.com',2,1143,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1286,'Tseng','Foon Yue','x2248','ftseng@classicmodelcars.com',3,1143,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1323,'Vanauf','George','x4102','gvanauf@classicmodelcars.com',3,1143,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1337,'Bondur','Loui','x6493','lbondur@classicmodelcars.com',4,1102,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1370,'Hernandez','Gerard','x2028','ghernande@classicmodelcars.com',4,1102,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1401,'Castillo','Pamela','x2759','pcastillo@classicmodelcars.com',4,1102,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1501,'Bott','Larry','x2311','lbott@classicmodelcars.com',7,1102,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1504,'Jones','Barry','x102','bjones@classicmodelcars.com',7,1102,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1611,'Fixter','Andy','x101','afixter@classicmodelcars.com',6,1088,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1612,'Marsh','Peter','x102','pmarsh@classicmodelcars.com',6,1088,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1619,'King','Tom','x103','tking@classicmodelcars.com',6,1088,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1621,'Nishi','Mami','x101','mnishi@classicmodelcars.com',5,1056,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1625,'Kato','Yoshimi','x102','ykato@classicmodelcars.com',5,1621,'Sales Rep')
+INSERT INTO EMPLOYEES VALUES(1702,'Gerard','Martin','x2312','mgerard@classicmodelcars.com',4,1102,'Sales Rep')
+INSERT INTO OFFICES VALUES(1,'San Francisco','+1 650 219 4782','100 Market Street','Suite 300','CA','USA','94080','NA')
+INSERT INTO OFFICES VALUES(2,'Boston','+1 215 837 0825','1550 Court Place','Suite 102','MA','USA','02107','NA')
+INSERT INTO OFFICES VALUES(3'NYC','+1 212 555 3000','523 East 53rd Street','apt. 5A','NY','USA','10022','NA')
+INSERT INTO OFFICES VALUES(4,'Paris','+33 14 723 4404','43 Rue Jouffroy D''abbans','','','France','75017','EMEA')
+INSERT INTO OFFICES VALUES(5,'Tokyo','+81 33 224 5000','4-1 Kioicho','','Chiyoda-Ku','Japan','102-8578','Japan')
+INSERT INTO OFFICES VALUES(6,'Sydney','+61 2 9264 2451','5-11 Wentworth Avenue','Floor #2','','Australia','NSW 2010','APAC')
+INSERT INTO OFFICES VALUES(7,'London','+44 20 7877 2041','25 Old Broad Street','Level 7','','UK','EC2N 1HN','EMEA')
+
+
+ALTER TABLE EMPLOYEES ADD CONSTRAINT SYS_FK_01 FOREIGN KEY(OFFICE_ID) REFERENCES OFFICES(OFFICE_ID)
